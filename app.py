@@ -26,7 +26,7 @@ from core.pdf_export import export_pdf
 
 st.set_page_config(
     page_title="AI Resume Tailor Pro",
-    page_icon="🚀",
+    page_icon="📝",
     layout="wide"
 )
 
