@@ -1,0 +1,14 @@
+streamlit
+langchain
+langchain-community
+langchain-google-genai
+faiss-cpu
+pypdf
+python-docx
+python-dotenv
+plotly
+pandas
+numpy
+requests
+beautifulsoup4
+reportlab
