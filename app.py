@@ -155,7 +155,7 @@ if menu == "Resume Analysis":
         height=250
     )
 
-    c1, c2, c3, c4, c5 = st.columns(5)
+    c1, c2, c3, c4, c5, c6 = st.columns(6)
 
     analyze_btn = c1.button(
     "Analyze Resume",
@@ -179,6 +179,11 @@ if menu == "Resume Analysis":
 
     txt_btn = c5.button(
     "TXT",
+    use_container_width=True
+    )
+
+    clear_btn = c6.button(
+    "Clear",
     use_container_width=True
     )
 
