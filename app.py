@@ -352,54 +352,53 @@ if menu == "Resume Analysis":
             )
 
         else:
-
-    with st.spinner(
-        "Generating Tailored Resume..."
-    ):
-
-        tailored_resume = f"""
-TAILORED RESUME
-
-{st.session_state.resume_text}
-
-Optimized For Job Description
-
-{st.session_state.job_description}
-"""
-
-        st.session_state.tailored_resume = (
-            tailored_resume
-        )
-
-        st.session_state.history.append(
-            {
-                "date": str(datetime.now()),
-                "score": st.session_state.ats_score
-            }
-        )
-
-    st.success(
-        "Tailored Resume Generated"
-    )
-
-    st.text_area(
-        "Tailored Resume",
-        st.session_state.tailored_resume,
-        height=500
-    )
-
-    st.markdown("---")
-
-    st.subheader(
-        "Download Tailored Resume"
-    )
-
-    st.download_button(
-        "Download TXT",
-        st.session_state.tailored_resume,
-        file_name="tailored_resume.txt",
-        mime="text/plain"
-    )
+            with st.spinner(
+                "Generating Tailored Resume..."
+            ):
+                
+                tailored_resume = f"""
+                TAILORED RESUME
+                
+                {st.session_state.resume_text}
+                
+                Optimized For Job Description
+                
+                {st.session_state.job_description}
+                """
+                
+                
+                st.session_state.tailored_resume = (
+                    tailored_resume
+                )
+                st.session_state.history.append(
+                    {
+                        "date": str(datetime.now()),
+                        "score": st.session_state.ats_score
+                    }
+                )
+                
+                st.success(
+                    "Tailored Resume Generated"
+                )
+                
+                st.text_area(
+                    "Tailored Resume",
+                    st.session_state.tailored_resume,
+                    height=500
+                )
+                
+                st.markdown("---")
+                
+                st.subheader(
+                    "Download Tailored Resume"
+                )
+                
+                st.download_button(
+                    "Download TXT",
+                    st.session_state.tailored_resume,
+                    file_name="tailored_resume.txt",
+                    mime="text/plain"
+                )
             # Future Code
 
             # rag = ResumeRAG()
