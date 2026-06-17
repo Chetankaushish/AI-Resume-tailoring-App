@@ -126,7 +126,12 @@ with st.sidebar:
 
 if menu == "Resume Analysis":
 
-    st.title("🚀 AI Resume Tailor Pro")
+    st.markdown("""
+    <div class="hero">
+    <h1>🚀 AI Resume Tailor Pro</h1>
+    <p>Create ATS Optimized Resumes with Gemini AI</p>
+    </div>
+    """, unsafe_allow_html=True)
 
     st.caption(
         "ATS Optimization using Gemini + LangChain + FAISS"
