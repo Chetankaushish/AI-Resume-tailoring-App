@@ -65,6 +65,9 @@ if "ats_score" not in st.session_state:
 if "missing_keywords" not in st.session_state:
     st.session_state.missing_keywords = []
 
+if "tailored_resume" not in st.session_state:
+    st.session_state.tailored_resume = ""
+
 # =====================================
 # ATS GAUGE
 # =====================================
@@ -111,9 +114,9 @@ with st.sidebar:
         """
         Powered By
 
-        ✅ Gemini 2.5 Flash
-        ✅ LangChain
-        ✅ FAISS
+         Gemini 2.5 Flash+
+         LangChain+
+         FAISS
         """
     )
 
@@ -144,7 +147,7 @@ if menu == "Resume Analysis":
 
         job_url = st.text_input(
             "Job URL",
-            placeholder="Paste LinkedIn / Indeed / Naukri URL"
+            placeholder="Paste LinkedIn / Indeed / Naukri URL / Company Career Page "
         )
 
     job_description = st.text_area(
@@ -152,23 +155,31 @@ if menu == "Resume Analysis":
         height=250
     )
 
-    st.markdown("---")
-
-    c1, c2, c3 = st.columns(3)
+    c1, c2, c3, c4, c5 = st.columns(5)
 
     analyze_btn = c1.button(
-        "Analyze Resume",
-        use_container_width=True
+    "Analyze Resume",
+    use_container_width=True
     )
 
     tailor_btn = c2.button(
-        "Tailor Resume",
-        use_container_width=True
+    "Tailor Resume",
+    use_container_width=True
     )
 
-    clear_btn = c3.button(
-        "Clear",
-        use_container_width=True
+    pdf_btn = c3.button(
+    "PDF",
+    use_container_width=True
+    )
+
+    docx_btn = c4.button(
+    "DOCX",
+    use_container_width=True
+    )
+
+    txt_btn = c5.button(
+    "TXT",
+    use_container_width=True
     )
 
     # =====================================
@@ -262,6 +273,7 @@ if menu == "Resume Analysis":
                 st.error(
                     f"Error: {str(e)}"
                 )
+                
 
     # =====================================
     # DISPLAY RESULTS
@@ -341,13 +353,53 @@ if menu == "Resume Analysis":
 
         else:
 
-            st.info(
-                """
-                Gemini + LangChain + FAISS
-                integration goes here
-                """
-            )
+    with st.spinner(
+        "Generating Tailored Resume..."
+    ):
 
+        tailored_resume = f"""
+TAILORED RESUME
+
+{st.session_state.resume_text}
+
+Optimized For Job Description
+
+{st.session_state.job_description}
+"""
+
+        st.session_state.tailored_resume = (
+            tailored_resume
+        )
+
+        st.session_state.history.append(
+            {
+                "date": str(datetime.now()),
+                "score": st.session_state.ats_score
+            }
+        )
+
+    st.success(
+        "Tailored Resume Generated"
+    )
+
+    st.text_area(
+        "Tailored Resume",
+        st.session_state.tailored_resume,
+        height=500
+    )
+
+    st.markdown("---")
+
+    st.subheader(
+        "Download Tailored Resume"
+    )
+
+    st.download_button(
+        "Download TXT",
+        st.session_state.tailored_resume,
+        file_name="tailored_resume.txt",
+        mime="text/plain"
+    )
             # Future Code
 
             # rag = ResumeRAG()
